@@ -304,4 +304,44 @@ Be the first to know about:
 
 Join the Nosana builder community today — and build the future of decentralized AI.
 
+---
+
+## Crypto Compliance Content Agent - Project Notes
+
+This repository now includes a starter implementation for the "Crypto Compliance Content Agent" — an agent designed to help content creators and developers produce accurate crypto compliance content (FATF, KYC, AML, Web3 frameworks).
+
+Key pieces added:
+- `src/mastra/agents/cryptoAgent.ts` — minimal agent wired with tools (RAG lookup, content generation, verification, formatting)
+- `src/mastra/tools/index.ts` — tool stubs for RAG (`rag-lookup`), generation (`generate-content`), verification (`verify-facts`), and formatting (`format-platform`)
+- `.env.example` — environment variables needed for RAG (Upstash), model provider, and the agent DB
+
+Quick run (local dev):
+
+1. Copy `.env.example` to `.env` and fill provider tokens (Upstash, OpenAI) if you use them.
+
+2. Start the Mastra agent runtime and Next UI in two terminals:
+
+```powershell
+# Terminal A - start Mastra agent runtime
+npm run dev:agent
+
+# Terminal B - start Next UI
+$Env:NEXT_PUBLIC_DEFAULT_AGENT='cryptoAgent'; npm run dev:ui
+```
+
+3. Open the UI at http://localhost:3000 and the Mastra playground at the agent port (if available).
+
+Notes & next work I can do for you:
+- Wire Upstash Vector properly for RAG (indexing + secure token storage)
+- Implement persistence of agent memory using LibSQLStore (file-based or cloud)
+- Implement real model calls in `generate-content` using OpenAI or Ollama (currently stubs)
+- Add frontend UI components to call the tools and display verification evidence
+
+Tell me which of the follow-ups you want next and I'll implement them:
+- Persist agent memory (file-backed libsql) and update `addAddress` to store addresses
+- Implement real RAG connection to Upstash Vector and a small uploader script to index documents
+- Implement `generate-content` to call your chosen model provider and format output
+- Add a small UI for adding/listing addresses and generating content from prompts
+
+
 

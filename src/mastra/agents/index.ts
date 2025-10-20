@@ -1,4 +1,5 @@
 import "dotenv/config";
+import "./instrumentation";
 import { openai } from "@ai-sdk/openai";
 import { createOllama } from "ollama-ai-provider-v2";
 import { Agent } from "@mastra/core/agent";
@@ -6,6 +7,7 @@ import { weatherTool } from "@/mastra/tools";
 import { LibSQLStore } from "@mastra/libsql";
 import { z } from "zod";
 import { Memory } from "@mastra/memory";
+import { cryptoAgent } from "./cryptoAgent";
 
 export const AgentState = z.object({
   proverbs: z.array(z.string()).default([]),
@@ -32,3 +34,5 @@ export const weatherAgent = new Agent({
     },
   }),
 })
+
+export { cryptoAgent };

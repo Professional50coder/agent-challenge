@@ -1,0 +1,111 @@
+/* Style for the scoring dashboard */
+.scoringDashboard {
+  background-color: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  padding: 1.5rem;
+}
+
+.scoreBadge {
+  font-size: 3rem;
+  line-height: 1;
+  font-weight: 700;
+}
+
+.gradeBadge {
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+  padding: 1rem 1.5rem;
+  border-radius: 0.375rem;
+}
+
+.gradeBadgeGood {
+  background-color: rgb(220 252 231);
+  color: rgb(22 101 52);
+}
+
+.gradeBadgeBad {
+  background-color: rgb(255 237 213);
+  color: rgb(154 52 18);
+}
+
+/* Style for the questionnaire */
+.questionCard {
+  background-color: white;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  margin-bottom: 1rem;
+}
+
+.riskBadge {
+  padding: 0.375rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.riskBadgeCritical {
+  background-color: rgb(254 226 226);
+  color: rgb(153 27 27);
+}
+
+.riskBadgeHigh {
+  background-color: rgb(255 237 213);
+  color: rgb(154 52 18);
+}
+
+.riskBadgeMedium {
+  background-color: rgb(254 249 195);
+  color: rgb(133 77 14);
+}
+
+.riskBadgeLow {
+  background-color: rgb(219 234 254);
+  color: rgb(30 64 175);
+}
+
+.riskBadgeInfo {
+  background-color: rgb(243 244 246);
+  color: rgb(31 41 55);
+}
+
+/* Evidence upload styles */
+.fileUpload {
+  display: block;
+  width: 100%;
+  font-size: 0.875rem;
+  color: rgb(107 114 128);
+}
+
+.fileUpload::-webkit-file-upload-button {
+  margin-right: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 9999px;
+  border: none;
+  font-size: 0.875rem;
+  font-weight: 600;
+  background-color: rgb(239 246 255);
+  color: rgb(29 78 216);
+}
+
+.fileUpload::-webkit-file-upload-button:hover {
+  background-color: rgb(219 234 254);
+}
+
+/* Comments section */
+.commentBox {
+  margin-top: 0.25rem;
+  display: block;
+  width: 100%;
+  border-radius: 0.375rem;
+  border: 1px solid rgb(209 213 219);
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  font-size: 0.875rem;
+}
+
+.commentBox:focus {
+  border-color: rgb(59 130 246);
+  box-shadow: 0 0 0 2px rgb(59 130 246 / 0.25);
+  outline: none;
+}

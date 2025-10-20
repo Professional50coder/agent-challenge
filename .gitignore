@@ -40,6 +40,10 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+# database files
+*.db
+*.db-shm
+*.db-wal
 memory.*
 .mastra
 

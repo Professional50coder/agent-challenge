@@ -24,10 +24,12 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const defaultAgent = process.env.NEXT_PUBLIC_DEFAULT_AGENT || 'cryptoAgent';
+
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <CopilotKit runtimeUrl="/api/copilotkit" agent="weatherAgent">
+        <CopilotKit runtimeUrl="/api/copilotkit" agent={defaultAgent}>
           {children}
         </CopilotKit>
       </body>

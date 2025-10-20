@@ -1,0 +1,18 @@
+@import 'tw-animate-css';
+
+/* External agent package theme variables (kept separate). */
+:root {
+  --ea-background: oklch(1 0 0);
+  --ea-foreground: oklch(0.145 0 0);
+}
+
+.ea-dark {
+  --ea-background: oklch(0.145 0 0);
+  --ea-foreground: oklch(0.985 0 0);
+}
+
+/* Small helper class to apply external-agent background */
+.external-agent-bg {
+  background: var(--ea-background);
+  color: var(--ea-foreground);
+}

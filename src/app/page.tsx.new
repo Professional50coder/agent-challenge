@@ -1,0 +1,91 @@
+"use client";
+
+import { useState } from 'react';
+import { ComplianceScoring } from '@/components/ComplianceScoring';
+import { ComplianceQuestionnaire } from '@/components/ComplianceQuestionnaire';
+import { CopilotSidebar } from "@copilotkit/react-ui";
+import { ComplianceQuestion } from '@/mastra/schemas/compliance';
+import { z } from 'zod';
+
+export default function ComplianceAssessment() {
+  const [assessment, setAssessment] = useState({
+    overallScore: 78,
+    findings: [],
+    statistics: {
+      implemented: 34,
+      partial: 12,
+      missing: 8,
+      notAssessed: 2,
+      criticalCount: 2,
+      highCount: 5,
+      mediumCount: 8,
+      lowCount: 15,
+    },
+    metadata: {
+      assessmentDate: new Date().toISOString(),
+      assessmentType: 'Initial',
+      assessor: 'Crypto Compliance Agent',
+      framework: 'FATF',
+    }
+  });
+
+  const [questions] = useState<Array<z.infer<typeof ComplianceQuestion>>>([
+    {
+      id: '1',
+      text: 'Does the project implement proper KYC/AML procedures?',
+      weight: 'Critical' as const,
+      category: 'Identity & Access',
+      subCategory: 'KYC/AML',
+    },
+    {
+      id: '2', 
+      text: 'Are there mechanisms to prevent money laundering?',
+      weight: 'High' as const,
+      category: 'Security',
+      subCategory: 'Anti-Money Laundering',
+    }
+  ]);
+
+  const handleAnswer = (questionId: string, answer: 'Yes' | 'No' | 'N/A', evidence?: string[]) => {
+    console.log('Answer:', { questionId, answer, evidence });
+  };
+
+  return (
+    <main className="min-h-screen bg-gray-50">
+      <div className="max-w-7xl mx-auto px-4 py-8">
+        <h1 className="text-3xl font-bold text-gray-900 mb-8">
+          Crypto Project Compliance Assessment
+        </h1>
+        
+        <section className="mb-12">
+          <ComplianceScoring assessment={assessment} />
+        </section>
+
+        <section>
+          <h2 className="text-2xl font-semibold text-gray-800 mb-6">
+            Compliance Questionnaire
+          </h2>
+          <ComplianceQuestionnaire 
+            questions={questions}
+            onAnswer={handleAnswer}
+          />
+        </section>
+      </div>
+
+      <CopilotSidebar
+        defaultOpen={true}
+        labels={{
+          title: "Compliance Assessment Assistant",
+          initial: `👋 Hi! I'm your Crypto Compliance Assistant. I can help you:
+
+- Assess your project's compliance with regulations
+- Verify specific compliance claims
+- Generate recommendations for improvements
+- Calculate risk scores and metrics
+
+Let me know what you'd like to evaluate!`
+        }}
+      />
+    </main>
+  );
+}

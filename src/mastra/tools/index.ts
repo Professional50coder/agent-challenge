@@ -104,3 +104,92 @@ function getWeatherCondition(code: number): string {
   };
   return conditions[code] || 'Unknown';
 }
+
+// ------------------ Crypto Compliance Tools (stubs) ------------------
+
+const UpstashSearchResultSchema = z.object({
+  id: z.string(),
+  text: z.string(),
+  metadata: z.record(z.string()).optional(),
+});
+
+export const ragLookupTool = createTool({
+  id: 'rag-lookup',
+  description: 'Retrieve relevant compliance documents/snippets from Upstash Vector for RAG',
+  inputSchema: z.object({ query: z.string() }),
+  outputSchema: z.object({ results: z.array(UpstashSearchResultSchema) }),
+  execute: async ({ context }) => {
+    const endpoint = process.env.UPSTASH_VECTOR_ENDPOINT;
+    const token = process.env.UPSTASH_VECTOR_TOKEN;
+    if (!endpoint || !token) {
+      return { results: [] };
+    }
+
+    // Simple Upstash vector query payload (their API can vary). This is a stub implementation.
+    const resp = await fetch(`${endpoint}/query`, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        index: process.env.UPSTASH_VECTOR_INDEX,
+        query: context.query,
+        topK: 5,
+      }),
+    });
+
+    if (!resp.ok) return { results: [] };
+
+    const data = await resp.json();
+    // Normalize to expected schema
+    const results = (data.results || []).map((r: any) => ({
+      id: r.id || r._id || '',
+      text: r.text || r.document || r.data || '',
+      metadata: r.metadata || r.meta || {},
+    }));
+
+    return { results };
+  },
+});
+
+export const generateContentTool = createTool({
+  id: 'generate-content',
+  description: 'Generate educational or platform-ready content about a compliance topic',
+  inputSchema: z.object({
+    prompt: z.string(),
+    length: z.enum(['short', 'medium', 'long']).default('medium'),
+    tone: z.string().optional(),
+    platform: z.string().optional(),
+  }),
+  outputSchema: z.object({ content: z.string() }),
+  execute: async ({ context }) => {
+    // This should call your configured model provider. For now return a stub.
+    const content = `Generated content for prompt: ${context.prompt} (length=${context.length}, platform=${context.platform || 'generic'})`;
+    return { content };
+  },
+});
+
+export const verifyFactsTool = createTool({
+  id: 'verify-facts',
+  description: 'Verify factual claims against compliance sources and return verification results',
+  inputSchema: z.object({ claims: z.array(z.string()) }),
+  outputSchema: z.object({ results: z.array(z.object({ claim: z.string(), verified: z.boolean(), evidence: z.string().optional() })) }),
+  execute: async ({ context }) => {
+    // Stubbed verification: in real world this would use RAG + cross-references
+    const results = context.claims.map((c: string) => ({ claim: c, verified: false as boolean, evidence: '' }));
+    return { results };
+  },
+});
+
+export const formatForPlatformTool = createTool({
+  id: 'format-platform',
+  description: 'Format a piece of content for a target platform (X, LinkedIn, YouTube)',
+  inputSchema: z.object({ content: z.string(), platform: z.enum(['x', 'linkedin', 'youtube', 'generic']).default('generic') }),
+  outputSchema: z.object({ formatted: z.string() }),
+  execute: async ({ context }) => {
+    // Simple formatter stub
+    const formatted = `Formatted for ${context.platform}: ${context.content}`;
+    return { formatted };
+  },
+});

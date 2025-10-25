@@ -1,11 +1,12 @@
-# Builders' Challenge #3: AI Agents 102
-**Presented by Nosana and Mastra**
+# Crypto Compliance Agent
 
-![Agent](./assets/NosanaBuildersChallenge03.jpg)
+A sophisticated AI-powered compliance monitoring and assessment tool for cryptocurrency projects and digital assets. This application helps organizations maintain regulatory compliance, assess risks, and generate detailed compliance reports.
 
-## Welcome to the AI Agent Challenge
+![Crypto Compliance Agent](./public/crypto-compliance-banner.png)
 
-Build and deploy intelligent AI agents using the **Mastra framework** on the **Nosana decentralized compute network**. Whether you're a beginner or an experienced developer, this challenge has something for everyone!
+## Overview
+
+The Crypto Compliance Agent is built using the Mastra framework and runs on the Nosana decentralized compute network. It provides real-time compliance monitoring, risk assessment, and automated reporting for cryptocurrency projects.
 
 ## 🎯 Challenge Overview
 
